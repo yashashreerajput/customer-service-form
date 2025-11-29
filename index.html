@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer Service Request Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Basic CSS inside same file for now -->
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #ffffff;
+      margin: 30px 10px;
+      padding: 20px 25px 25px;
+      max-width: 500px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    p.subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #555;
+      margin-top: -5px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .required {
+      color: red;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #0077cc;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 15px;
+      font-size: 13px;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      background: #0077cc;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .btn-submit:hover {
+      background: #005fa3;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 3px;
+      display: none;
+    }
+
+    .success-message {
+      background: #e0ffe3;
+      border: 1px solid #7fd58b;
+      color: #1f7a2b;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Customer Service Request Form</h1>
+    <p class="subtitle">Please fill in the details below so we can assist you better.</p>
+
+    <div id="successMsg" class="success-message">
+      ✅ Your request has been submitted. Our team will contact you soon.
+    </div>
+
+    <form id="serviceForm">
+      <!-- Customer Name -->
+      <div class="form-group">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" />
+        <div class="error" id="nameError">Please enter your name.</div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <input type="email" id="email" name="email" placeholder="example@email.com" />
+        <div class="error" id="emailError">Please enter a valid email.</div>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone Number <span class="required">*</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" />
+        <div class="error" id="phoneError">Please enter a valid phone number.</div>
+      </div>
+
+      <!-- Address Details -->
+<fieldset>
+    <legend>Address Details</legend>
+  
+    <div class="form-group">
+      <label for="addressLine1">Address Line 1 <span class="required">*</span></label>
+      <input type="text" id="addressLine1" name="addressLine1" required placeholder="House No. / Street / Building Name">
+      <small>Main address line for service visit and documentation.</small>
+    </div>
+  
+    <div class="form-group">
+      <label for="addressLine2">Address Line 2</label>
+      <input type="text" id="addressLine2" name="addressLine2" placeholder="Landmark / Area (optional)">
+      <small>This helps the service team locate your place easily.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="country">Country <span class="required">*</span></label>
+        <input type="text" id="country" name="country" required placeholder="Enter your country">
+        <small>This helps us check if there are any region-specific restrictions.</small>
+      </div>
+      
+  
+    <div class="form-group">
+      <label for="city">City <span class="required">*</span></label>
+      <input type="text" id="city" name="city" required placeholder="Enter your city">
+    </div>
+  
+    <div class="form-group">
+      <label for="state">State <span class="required">*</span></label>
+      <input type="text" id="state" name="state" required placeholder="Enter your state">
+    </div>
+  
+    <div class="form-group">
+      <label for="pincode">Pincode <span class="required">*</span></label>
+      <input type="number" id="pincode" name="pincode" required minlength="6" maxlength="6" placeholder="Postal Code">
+    </div>
+  </fieldset>
+
+  
+  
+  
+
+      <div class="form-group">
+        <label for="serviceType">Service Type <span class="required">*</span></label>
+        <select id="serviceType" name="serviceType" required>
+          <option value="">-- Select Service Category --</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="maintenance">Maintenance</option>
+          <option value="installation">Installation</option>
+          <option value="repair">Repair</option>
+          <option value="other">Other</option>
+        </select>
+        <small>Select the service category that matches your requirement. This helps us assign the right specialist to your case.</small>
+      </div>
+      
+      <div class="form-group">
+        <label for="serviceImage">Upload Images (Optional)</label>
+        <input type="file" id="serviceImage" name="serviceImage" accept="image/*" multiple />
+      </div>
+      
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Issue Description <span class="required">*</span></label>
+        <textarea id="description" name="description" placeholder="Describe your issue in detail"></textarea>
+        <div class="error" id="descriptionError">Please describe your issue.</div>
+      </div>
+
+      <!-- Preferred Contact -->
+      <div class="form-group">
+        <label>Preferred Contact Method <span class="required">*</span></label>
+        <div class="radio-group">
+          <label><input type="radio" name="contactMethod" value="email" /> Email</label>
+          <label><input type="radio" name="contactMethod" value="phone" /> Phone</label>
+          <label><input type="radio" name="contactMethod" value="whatsapp" /> WhatsApp</label>
+        </div>
+        <div class="error" id="contactError">Please select a contact method.</div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn-submit">Submit Request</button>
+    </form>
+  </div>
+
+  <!-- Simple JS validation -->
+  <script>
+    const form = document.getElementById('serviceForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // stop real submission
+
+      // Clear previous errors
+      document.querySelectorAll('.error').forEach(e => e.style.display = 'none');
+      successMsg.style.display = 'none';
+
+      // Get values
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const serviceType = document.getElementById('serviceType').value;
+      const description = document.getElementById('description').value.trim();
+      const contactMethod = document.querySelector('input[name="contactMethod"]:checked');
+
+      let isValid = true;
+
+      // Name
+      if (name === '') {
+        document.getElementById('nameError').style.display = 'block';
+        isValid = false;
+      }
+
+      // Email basic check
+      if (email === '' || !email.includes('@') || !email.includes('.')) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+      }
+
+      // Phone basic check: 10 digits
+      if (phone.length < 10 || isNaN(phone)) {
+        document.getElementById('phoneError').style.display = 'block';
+        isValid = false;
+      }
+
+      // Service type
+      if (serviceType === '') {
+        document.getElementById('serviceError').style.display = 'block';
+        isValid = false;
+      }
+
+      // Description
+      if (description === '') {
+        document.getElementById('descriptionError').style.display = 'block';
+        isValid = false;
+      }
+
+      // Contact method
+      if (!contactMethod) {
+        document.getElementById('contactError').style.display = 'block';
+        isValid = false;
+      }
+
+      if (isValid) {
+        // For now just show a success message
+        successMsg.style.display = 'block';
+
+        // If you want to clear the form after submit:
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
