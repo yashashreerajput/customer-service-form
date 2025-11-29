@@ -47,7 +47,7 @@
     }
 
     .form-group {
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
     label {
@@ -64,6 +64,7 @@
     input[type="text"],
     input[type="email"],
     input[type="tel"],
+    input[type="number"],
     select,
     textarea {
       width: 100%;
@@ -89,6 +90,7 @@
       display: flex;
       gap: 15px;
       font-size: 13px;
+      margin-top: 4px;
     }
 
     .radio-group label {
@@ -129,6 +131,28 @@
       margin-bottom: 12px;
       display: none;
     }
+
+    .form-group small {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: #666;
+    }
+
+    /* Phone row: country code + number side-by-side */
+    .phone-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .phone-row select {
+      width: 30%;
+    }
+
+    .phone-row input {
+      flex: 1;
+    }
   </style>
 </head>
 <body>
@@ -144,67 +168,134 @@
       <!-- Customer Name -->
       <div class="form-group">
         <label for="name">Full Name <span class="required">*</span></label>
-        <input type="text" id="name" name="name" placeholder="Enter your full name" />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your full name"
+        />
         <div class="error" id="nameError">Please enter your name.</div>
       </div>
 
       <!-- Email -->
       <div class="form-group">
         <label for="email">Email Address <span class="required">*</span></label>
-        <input type="email" id="email" name="email" placeholder="example@email.com" />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="example@email.com"
+        />
         <div class="error" id="emailError">Please enter a valid email.</div>
       </div>
 
-      <!-- Phone -->
+      <!-- Phone Number With Country Code -->
       <div class="form-group">
-        <label for="phone">Phone Number <span class="required">*</span></label>
-        <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" />
-        <div class="error" id="phoneError">Please enter a valid phone number.</div>
+        <label for="phone">Phone Number</label>
+        <div class="phone-row">
+          <!-- Country Code Dropdown -->
+          <select name="country_code" id="country_code">
+            <option value="+91" selected>+91 (IN)</option>
+            <option value="+1">+1 (US)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+971">+971 (UAE)</option>
+            <option value="+61">+61 (AUS)</option>
+            <option value="+81">+81 (JPN)</option>
+            <option value="+49">+49 (GER)</option>
+            <option value="+33">+33 (FR)</option>
+            <option value="+39">+39 (IT)</option>
+            <option value="+34">+34 (SP)</option>
+          </select>
+
+          <!-- Phone Input -->
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Enter phone number"
+            pattern="[0-9]{7,15}"
+            title="7–15 digit numbers only"
+          />
+        </div>
+        <small>Select country code then enter phone number. (7–15 digits)</small>
+        <div class="error" id="phoneError">Please enter a valid phone number (10 digits).</div>
       </div>
 
-      <!-- Address Details -->
-<fieldset>
-    <legend>Address Details</legend>
-  
-    <div class="form-group">
-      <label for="addressLine1">Address Line 1 <span class="required">*</span></label>
-      <input type="text" id="addressLine1" name="addressLine1" required placeholder="House No. / Street / Building Name">
-      <small>Main address line for service visit and documentation.</small>
-    </div>
-  
-    <div class="form-group">
-      <label for="addressLine2">Address Line 2</label>
-      <input type="text" id="addressLine2" name="addressLine2" placeholder="Landmark / Area (optional)">
-      <small>This helps the service team locate your place easily.</small>
-    </div>
+      <!-- Address Line 1 -->
+      <div class="form-group">
+        <label for="addressLine1">Address Line 1 <span class="required">*</span></label>
+        <input
+          type="text"
+          id="addressLine1"
+          name="addressLine1"
+          required
+          placeholder="House No. / Street / Building Name"
+        />
+        <small>Main address line for service visit and documentation.</small>
+      </div>
 
-    <div class="form-group">
+      <!-- Address Line 2 -->
+      <div class="form-group">
+        <label for="addressLine2">Address Line 2</label>
+        <input
+          type="text"
+          id="addressLine2"
+          name="addressLine2"
+          placeholder="Landmark / Area (optional)"
+        />
+        <small>This helps the service team locate your place easily.</small>
+      </div>
+
+      <!-- Country -->
+      <div class="form-group">
         <label for="country">Country <span class="required">*</span></label>
-        <input type="text" id="country" name="country" required placeholder="Enter your country">
+        <input
+          type="text"
+          id="country"
+          name="country"
+          required
+          placeholder="Enter your country"
+        />
         <small>This helps us check if there are any region-specific restrictions.</small>
       </div>
-      
-  
-    <div class="form-group">
-      <label for="city">City <span class="required">*</span></label>
-      <input type="text" id="city" name="city" required placeholder="Enter your city">
-    </div>
-  
-    <div class="form-group">
-      <label for="state">State <span class="required">*</span></label>
-      <input type="text" id="state" name="state" required placeholder="Enter your state">
-    </div>
-  
-    <div class="form-group">
-      <label for="pincode">Pincode <span class="required">*</span></label>
-      <input type="number" id="pincode" name="pincode" required minlength="6" maxlength="6" placeholder="Postal Code">
-    </div>
-  </fieldset>
 
-  
-  
-  
+      <!-- City -->
+      <div class="form-group">
+        <label for="city">City <span class="required">*</span></label>
+        <input
+          type="text"
+          id="city"
+          name="city"
+          required
+          placeholder="Enter your city"
+        />
+      </div>
 
+      <!-- State -->
+      <div class="form-group">
+        <label for="state">State <span class="required">*</span></label>
+        <input
+          type="text"
+          id="state"
+          name="state"
+          required
+          placeholder="Enter your state"
+        />
+      </div>
+
+      <!-- Pincode -->
+      <div class="form-group">
+        <label for="pincode">Pincode <span class="required">*</span></label>
+        <input
+          type="number"
+          id="pincode"
+          name="pincode"
+          required
+          placeholder="Postal Code"
+        />
+      </div>
+
+      <!-- Service Type -->
       <div class="form-group">
         <label for="serviceType">Service Type <span class="required">*</span></label>
         <select id="serviceType" name="serviceType" required>
@@ -215,19 +306,32 @@
           <option value="repair">Repair</option>
           <option value="other">Other</option>
         </select>
-        <small>Select the service category that matches your requirement. This helps us assign the right specialist to your case.</small>
+        <small>
+          Select the service category that matches your requirement. This helps us assign the right specialist to your case.
+        </small>
+        <div class="error" id="serviceError">Please select a service type.</div>
       </div>
-      
+
+      <!-- Upload Images -->
       <div class="form-group">
         <label for="serviceImage">Upload Images (Optional)</label>
-        <input type="file" id="serviceImage" name="serviceImage" accept="image/*" multiple />
+        <input
+          type="file"
+          id="serviceImage"
+          name="serviceImage"
+          accept="image/*"
+          multiple
+        />
       </div>
-      
 
       <!-- Description -->
       <div class="form-group">
         <label for="description">Issue Description <span class="required">*</span></label>
-        <textarea id="description" name="description" placeholder="Describe your issue in detail"></textarea>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Describe your issue in detail"
+        ></textarea>
         <div class="error" id="descriptionError">Please describe your issue.</div>
       </div>
 
@@ -281,8 +385,8 @@
         isValid = false;
       }
 
-      // Phone basic check: 10 digits
-      if (phone.length < 10 || isNaN(phone)) {
+      // Phone basic check: 10 digits (adjust if you want)
+      if (phone && (phone.length < 7 || phone.length > 15 || isNaN(phone))) {
         document.getElementById('phoneError').style.display = 'block';
         isValid = false;
       }
@@ -293,7 +397,7 @@
         isValid = false;
       }
 
-      // Description
+      // Description (you can enforce 15–255 chars if needed)
       if (description === '') {
         document.getElementById('descriptionError').style.display = 'block';
         isValid = false;
@@ -306,10 +410,7 @@
       }
 
       if (isValid) {
-        // For now just show a success message
         successMsg.style.display = 'block';
-
-        // If you want to clear the form after submit:
         form.reset();
       }
     });
